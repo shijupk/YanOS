@@ -1,5 +1,4 @@
 docker run --rm -it -v "%cd%":/root/env yanos-buildenv
-
 make build-yanos
-
-qemu-system-x86_64 -cdrom images\yanos-x86_64.iso
+exit
+qemu-system-x86_64 -cdrom dist\x86_64\yanos.iso
