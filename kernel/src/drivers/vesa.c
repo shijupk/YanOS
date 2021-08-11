@@ -1,6 +1,7 @@
 #include<vesa.h>
 #include <kernel.h>
 #include <multiboot.h>
+#include <logger.h>
 
 struct video_info_struct vesa_video_info;
 

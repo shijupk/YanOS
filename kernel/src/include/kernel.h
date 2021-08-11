@@ -24,10 +24,9 @@
 #define GDT_TSS         0x28 
 
 
-void _kdebug();
+
 
 #define __UNUSED__ __attribute__((unused))
 
-#define DEBUG _kdebug
 
 #endif

@@ -24,7 +24,7 @@ cflags := -fno-pic  -m64 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 	      -I $(c_include) -nostartfiles -nodefaultlibs -fno-exceptions \
 	      -Wall -Wextra -Werror -c -mcmodel=large -Wno-implicit-fallthrough -O2 \
 	      -Wno-parentheses
-c_source_files := $(wildcard src/drivers/*.c) $(wildcard src/kernel/*.c) $(wildcard src/lib/*.c) $(wildcard src/arch/x86_64/*.c) $(wildcard src/syscalls/*.c)
+c_source_files := $(wildcard src/drivers/*.c) $(wildcard src/kernel/*.c) $(wildcard src/lib/*.c) $(wildcard src/common/*.c) $(wildcard src/arch/x86_64/*.c) $(wildcard src/syscalls/*.c)
 c_object_files := $(patsubst src/%.c, \
 	build/%.o, $(c_source_files))
 quemu_mem := 128
@@ -36,6 +36,11 @@ all: $(kernel)
 
 clean:
 	@rm -rfv build
+
+run: $(iso)
+	$(objcopy) --only-keep-debug $(kernel) $(kernel).sym
+	$(nm) $(kernel).sym | grep " T " | awk '{ print $$1" "$$3 }' > $(kernel).bochs.sym
+	$(bochs) -rc ../bochs.rc -f ../bochs.cfg -q
 
 iso: $(iso)
 

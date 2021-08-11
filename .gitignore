@@ -3,3 +3,4 @@
 targets/x86_64/iso/boot/yanos.bin
 images/
 kernel/build/
+.vscode/

@@ -1,3 +1,5 @@
+
+docker build buildenv -t yanos-buildenv
 docker run --rm -it -v "%cd%":/root/env yanos-buildenv
 
 make build-yanos
